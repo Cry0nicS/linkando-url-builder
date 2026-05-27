@@ -60,9 +60,12 @@ export default defineNuxtConfig({
         }
     },
     site: {
-        description: "Welcome to Café Prana, your gluten-free and vegan haven in Berlin.",
-        name: "Café Prana",
-        url: "https://cafeprana.de"
+        description: "Welcome to Blue Desert.",
+        name: "Blue desert",
+        url: "https://blue-desert.com"
+    },
+    sitemap: {
+        zeroRuntime: true
     },
     typescript: {
         strict: true,
