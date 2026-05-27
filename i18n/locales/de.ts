@@ -1,11 +1,15 @@
 export default {
     pages: {
         home: "Startseite",
-        menu: "Menü",
-        reservations: "Reservierungen",
-        events: "Events",
         privacy: "Datenschutz",
         imprint: "Impressum",
-        contact: "Kontakt"
+        contact: "Kontakt",
+        program: "Programm",
+        aboutUs: "Über uns"
+    },
+    language: {
+        en: "English",
+        de: "Deutsch",
+        label: "Sprache"
     }
 };

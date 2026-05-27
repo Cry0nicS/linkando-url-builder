@@ -6,6 +6,14 @@ import type {LocaleCodes} from "../types";
  * E.g. pages/privacy/imprint.vue -> route name: 'privacy-imprint'
  */
 export const i18nPages = {
+    "program/index": {
+        en: "/program",
+        de: "/programm"
+    },
+    "about-us/index": {
+        en: "/about-us",
+        de: "/ueber-uns"
+    },
     "privacy/index": {
         en: "/privacy",
         de: "/datenschutz"
