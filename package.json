@@ -1,27 +1,51 @@
 {
-  "name": "bluedesert",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "clean": "npx nuxi cleanup && rm -rf node_modules/ && rm -rf .nuxt/ && rm package-lock.json",
-    "typecheck": "nuxt typecheck"
-  },
-  "dependencies": {
-    "@iconify-json/lucide": "^1.2.109",
-    "@iconify-json/simple-icons": "^1.2.84",
-    "@nuxt/ui": "^4.8.0",
-    "nuxt": "^4.4.6",
-    "tailwindcss": "^4.3.0"
-  },
-  "devDependencies": {
-    "@nuxt/eslint": "^1.15.2",
-    "eslint": "^10.4.0",
-    "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.2"
-  }
+    "name": "bluedesert",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "nuxt build",
+        "clean": "npx nuxi cleanup && rm -rf node_modules/ && rm -rf .nuxt/ && rm package-lock.json",
+        "dev": "nuxt dev",
+        "format": "prettier --write **/*.{js,json,jsx,css,ts,tsx,vue}",
+        "format-check": "prettier --check \"**/*.{html,js,json,jsx,css,ts,tsx,vue,scss}\"",
+        "generate": "nuxt generate",
+        "lint": "eslint .",
+        "postinstall": "nuxt prepare",
+        "prepare": "simple-git-hooks",
+        "preview": "nuxt preview",
+        "type-check": "nuxt typecheck"
+    },
+    "dependencies": {
+        "@nuxt/eslint": "^1.15.2",
+        "@nuxt/image": "^2.0.0",
+        "@nuxt/ui": "^4.5.1",
+        "@nuxtjs/i18n": "^10.2.3",
+        "@nuxtjs/seo": "^3.4.0",
+        "@unhead/vue": "^2.1.12",
+        "mailgun.js": "^12.7.1",
+        "nuxt": "^4.4.2",
+        "typescript": "^5.9.3",
+        "vue": "^3.5.30",
+        "vue-router": "4.6.4"
+    },
+    "devDependencies": {
+        "@antfu/eslint-config": "^7.7.2",
+        "@commitlint/cli": "^20.5.0",
+        "@commitlint/config-conventional": "^20.5.0",
+        "@iconify-json/lucide": "^1.2.98",
+        "eslint": "^10.0.3",
+        "lint-staged": "^16.4.0",
+        "prettier": "^3.8.1",
+        "prettier-plugin-tailwindcss": "^0.7.2",
+        "simple-git-hooks": "^2.13.1",
+        "vue-tsc": "^3.2.5"
+    },
+    "simple-git-hooks": {
+        "commit-msg": "npx commitlint --edit \"$1\"",
+        "pre-commit": "npx lint-staged"
+    },
+    "lint-staged": {
+        "*.{html,js,json,css,ts,vue}": "prettier --check",
+        "*.{js,ts,vue}": "eslint"
+    }
 }

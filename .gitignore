@@ -1,3 +1,8 @@
+##
+# IMPORTANT: Do not use this file to ignore IDE-specific project configuration files. Ignore them locally instead.
+# (see http://stackoverflow.com/questions/1753070/git-ignore-files-only-locally)
+##
+
 # Nuxt dev/build outputs
 .output
 .data
@@ -12,11 +17,6 @@ node_modules
 # Logs
 logs
 *.log
-
-# Misc
-.DS_Store
-.fleet
-.idea
 
 # Local env files
 .env
