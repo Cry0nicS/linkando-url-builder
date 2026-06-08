@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-    colorMode: false,
     compatibilityDate: "2025-07-15",
     css: ["~/assets/css/main.css"],
     devtools: {enabled: true},
@@ -31,6 +30,6 @@ export default defineNuxtConfig({
         typeCheck: true
     },
     ui: {
-        colorMode: true
+        colorMode: false
     }
 });

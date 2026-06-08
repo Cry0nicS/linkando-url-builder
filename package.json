@@ -20,7 +20,8 @@
         "@nuxt/image": "^2.0.0",
         "@nuxt/ui": "^4.8.0",
         "nuxt": "^4.4.6",
-        "typescript": "^6.0.3"
+        "typescript": "^6.0.3",
+        "zod": "^4.4.3"
     },
     "devDependencies": {
         "@antfu/eslint-config": "^9.0.0",
