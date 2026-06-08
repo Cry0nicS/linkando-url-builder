@@ -2,14 +2,14 @@
     <div>
         <UPageHero
             title="Generate a personalized Linkando URL"
-            description="                        Select the owner, enter the customer name, then copy the generated link." />
+            description="Select the owner, enter the customer name, then copy the generated link."
+            :ui="{container: 'max-w-6xl'}" />
         <UCard
             id="contact-form"
-            variant="subtle"
+            variant="soft"
             class="mx-auto max-w-3xl"
             :ui="{
                 root: 'ring ring-default/70 shadow-sm',
-                header: 'bg-elevated/40',
                 body: 'space-y-6'
             }">
             <template #header>
