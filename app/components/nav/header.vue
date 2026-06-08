@@ -1,11 +1,7 @@
 <template>
     <UHeader
         class="h-17.5"
-        mode="modal"
-        :menu="{transition: true}"
-        :ui="{
-            body: 'flex justify-center text-2xl'
-        }">
+        :toggle="false">
         <template #title>
             <ClientOnly>
                 <NuxtLink to="/">

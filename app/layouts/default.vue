@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const currentYear = computed(() => new Date().getFullYear());
+</script>
+
 <template>
     <div class="flex min-h-svh flex-col">
         <NavHeader />
@@ -17,6 +21,10 @@
                 }" />
         </ClientOnly>
 
-        <NavFooter />
+        <NavFooter>
+            <template #navigation>
+                <p class="text-muted text-sm">Copyright © {{ currentYear }}</p>
+            </template>
+        </NavFooter>
     </div>
 </template>

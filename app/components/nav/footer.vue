@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const slots = useSlots();
-
-const currentYear = computed(() => new Date().getFullYear());
 </script>
 
 <template>
     <UFooter>
-        <template #left>
-            <p class="text-muted text-sm">Copyright © {{ currentYear }}</p>
+        <template
+            v-if="slots.left"
+            #left>
+            <slot name="left" />
         </template>
         <template
             v-if="slots.navigation"
