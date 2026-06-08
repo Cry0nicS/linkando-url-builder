@@ -1,6 +1,3 @@
-<script setup lang="ts">
-const {headerDesktop, headerMobile} = useNavItems();
-</script>
 <template>
     <UHeader
         class="h-17.5"
@@ -19,20 +16,6 @@ const {headerDesktop, headerMobile} = useNavItems();
                     </NuxtLink>
                 </ClientOnly>
             </ColorScheme>
-        </template>
-
-        <UNavigationMenu :items="headerDesktop" />
-
-        <template #right>
-            <NavThemeToggle />
-            <NavLanguageSelector />
-        </template>
-
-        <template #body>
-            <UNavigationMenu
-                :items="headerMobile"
-                orientation="vertical"
-                class="-mx-2.5" />
         </template>
     </UHeader>
 </template>
