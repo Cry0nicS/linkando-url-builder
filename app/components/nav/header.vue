@@ -7,15 +7,11 @@
             body: 'flex justify-center text-2xl'
         }">
         <template #title>
-            <ColorScheme
-                placeholder="Logo"
-                tag="span">
-                <ClientOnly>
-                    <NuxtLink to="/">
-                        <AppLogo class="h-10 w-auto" />
-                    </NuxtLink>
-                </ClientOnly>
-            </ColorScheme>
+            <ClientOnly>
+                <NuxtLink to="/">
+                    <AppLogo class="h-10 w-auto" />
+                </NuxtLink>
+            </ClientOnly>
         </template>
     </UHeader>
 </template>

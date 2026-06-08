@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {FormSubmitEvent, RadioGroupItem} from "@nuxt/ui";
 import {z} from "zod";
+import GeneratedContentPanel from "~/components/form/generated-content-panel.vue";
 
 const schema = z.object({
     owner: z.enum(["ronny", "ingo", "ronald"], {
@@ -36,6 +37,12 @@ const ownerItems = ref<RadioGroupItem[]>([
     }
 ]);
 
+const ownerNames: Record<FormState["owner"], string> = {
+    ronny: "Ronny Koppitz",
+    ingo: "Ingo Bollow",
+    ronald: "Ronald Krahl"
+};
+
 const ownerBaseUrls: Record<FormState["owner"], string> = {
     ronny: "https://ronny-koppitz-ergo.linkando.com/webplay?id=jaehrliche-pruefung-ronny-koppitz",
     ingo: "https://ronny-koppitz-ergo.linkando.com/webplay?id=jaehrliche-pruefung-ingo-bollow",
@@ -43,9 +50,13 @@ const ownerBaseUrls: Record<FormState["owner"], string> = {
 };
 
 const toast = useToast();
-const generatedUrl = ref("");
 
-const hasGeneratedUrl = computed(() => generatedUrl.value.length > 0);
+const generatedUrl = ref("");
+const generatedEmail = ref("");
+
+const hasGeneratedResult = computed(
+    () => generatedUrl.value.length > 0 && generatedEmail.value.length > 0
+);
 
 function buildCustomUrl(data: FormState) {
     const url = new URL(ownerBaseUrls[data.owner]);
@@ -56,28 +67,64 @@ function buildCustomUrl(data: FormState) {
     return url.toString();
 }
 
+function buildEmailTemplate(data: FormState, link: string) {
+    return `Hallo ${data.firstName} ${data.lastName},
+
+Ihre Lebenssituation kann sich verändern – und genau deshalb ist eine regelmäßige Prüfung Ihrer bestehenden Absicherung sinnvoll.
+
+Ich möchte Sie daher bitten, das kurze Formular zur jährlichen Prüfung auszufüllen. Das dauert nur ca. 5 Minuten und Sie benötigen dafür keine Unterlagen.
+
+Hier können Sie direkt starten:
+
+${link}
+
+Mit Ihren Angaben helfen Sie mir, Ihre aktuelle Situation besser einzuschätzen und zu prüfen, ob Ihre Absicherung weiterhin gut zu Ihnen passt.
+
+Vielen Dank für Ihre Unterstützung.
+
+Freundliche Grüße
+${ownerNames[data.owner]}`;
+}
+
 async function onSubmit(event: FormSubmitEvent<FormState>) {
     generatedUrl.value = buildCustomUrl(event.data);
+    generatedEmail.value = buildEmailTemplate(event.data, generatedUrl.value);
 
     toast.add({
-        title: "Link generated",
-        description: "The personalized URL is ready to copy.",
+        title: "Content generated",
+        description: "The email template and personalized URL are ready to copy.",
         color: "success"
     });
 }
 
-async function copyGeneratedUrl() {
-    if (!generatedUrl.value) {
+async function copyToClipboard(value: string, title: string, description: string) {
+    if (!value) {
         return;
     }
 
-    await navigator.clipboard.writeText(generatedUrl.value);
+    await navigator.clipboard.writeText(value);
 
     toast.add({
-        title: "Copied",
-        description: "The URL has been copied to your clipboard.",
+        title,
+        description,
         color: "success"
     });
+}
+
+function copyGeneratedUrl() {
+    return copyToClipboard(
+        generatedUrl.value,
+        "Link copied",
+        "The URL has been copied to your clipboard."
+    );
+}
+
+function copyGeneratedEmail() {
+    return copyToClipboard(
+        generatedEmail.value,
+        "Email copied",
+        "The email template has been copied to your clipboard."
+    );
 }
 
 function resetForm() {
@@ -85,6 +132,7 @@ function resetForm() {
     state.firstName = undefined;
     state.lastName = undefined;
     generatedUrl.value = "";
+    generatedEmail.value = "";
 }
 </script>
 
@@ -138,7 +186,7 @@ function resetForm() {
                 type="submit"
                 size="lg"
                 icon="i-lucide-link">
-                Generate Link
+                Generate Content
             </UButton>
 
             <UButton
@@ -152,41 +200,12 @@ function resetForm() {
             </UButton>
         </div>
 
-        <UAlert
-            v-if="hasGeneratedUrl"
-            color="success"
-            variant="subtle"
-            title="Your personalized URL is ready"
-            description="Copy this link and send it to the customer."
-            icon="i-lucide-check-circle">
-            <template #description>
-                <div class="mt-4 space-y-3">
-                    <UInput
-                        :model-value="generatedUrl"
-                        readonly
-                        size="lg"
-                        class="w-full" />
-
-                    <div class="flex flex-col gap-2 sm:flex-row">
-                        <UButton
-                            type="button"
-                            color="success"
-                            icon="i-lucide-copy"
-                            @click="copyGeneratedUrl">
-                            Copy Link
-                        </UButton>
-
-                        <UButton
-                            type="button"
-                            color="neutral"
-                            variant="ghost"
-                            icon="i-lucide-refresh-cw"
-                            @click="resetForm">
-                            Generate another link
-                        </UButton>
-                    </div>
-                </div>
-            </template>
-        </UAlert>
+        <GeneratedContentPanel
+            v-if="hasGeneratedResult"
+            :generated-email="generatedEmail"
+            :generated-url="generatedUrl"
+            @copy-email="copyGeneratedEmail"
+            @copy-url="copyGeneratedUrl"
+            @reset="resetForm" />
     </UForm>
 </template>
