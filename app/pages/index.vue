@@ -1,8 +1,8 @@
 <template>
     <div>
         <UPageHero
-            title="Generate a personalized Linkando URL"
-            description="Select the owner, enter the customer name, then copy the generated link."
+            title="Generiere eine personalisierte Linkando-URL"
+            description="Wähle den Inhaber aus, gib den Kundennamen ein und kopiere dann den generierten Link."
             :ui="{container: 'max-w-6xl'}" />
         <UCard
             id="contact-form"
@@ -14,7 +14,7 @@
             }">
             <template #header>
                 <div class="space-y-1">
-                    <p class="text-primary text-sm font-medium">Link Generator</p>
+                    <p class="text-primary text-sm font-medium">Link-Generator</p>
                 </div>
             </template>
 

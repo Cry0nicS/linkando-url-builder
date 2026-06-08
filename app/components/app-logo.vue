@@ -1,5 +1,5 @@
 <template>
     <img
         src="/logo.png"
-        alt="URL Builder Logo" />
+        alt="URL-Builder-Logo" />
 </template>

@@ -16,7 +16,7 @@ const emit = defineEmits<{
         <UAlert
             color="success"
             variant="subtle"
-            title="Email template is ready"
+            title="E-Mail-Vorlage ist bereit"
             icon="i-lucide-mail-check">
             <template #description>
                 <div class="mt-4 space-y-3">
@@ -33,7 +33,7 @@ const emit = defineEmits<{
                         color="success"
                         icon="i-lucide-copy"
                         @click="emit('copyEmail')">
-                        Copy Email Text
+                        E-Mail-Text kopieren
                     </UButton>
                 </div>
             </template>
@@ -42,7 +42,7 @@ const emit = defineEmits<{
         <UAlert
             color="primary"
             variant="subtle"
-            title="Personalized URL is ready"
+            title="Personalisierte URL ist bereit"
             icon="i-lucide-link">
             <template #description>
                 <div class="mt-4 space-y-3">
@@ -58,7 +58,7 @@ const emit = defineEmits<{
                             color="primary"
                             icon="i-lucide-copy"
                             @click="emit('copyUrl')">
-                            Copy Link
+                            Link kopieren
                         </UButton>
 
                         <UButton
@@ -67,7 +67,7 @@ const emit = defineEmits<{
                             variant="ghost"
                             icon="i-lucide-refresh-cw"
                             @click="emit('reset')">
-                            Generate another link
+                            Weiteren Link generieren
                         </UButton>
                     </div>
                 </div>

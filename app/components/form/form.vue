@@ -5,10 +5,10 @@ import GeneratedContentPanel from "~/components/form/generated-content-panel.vue
 
 const schema = z.object({
     owner: z.enum(["ronny", "ingo", "ronald"], {
-        error: "Please select an owner."
+        error: "Bitte wähle einen Inhaber aus."
     }),
-    firstName: z.string().trim().min(1, "First name is required."),
-    lastName: z.string().trim().min(1, "Last name is required.")
+    firstName: z.string().trim().min(1, "Bitte gib einen Vornamen ein."),
+    lastName: z.string().trim().min(1, "Bitte gib einen Nachnamen ein.")
 });
 
 type FormState = z.output<typeof schema>;
@@ -22,17 +22,17 @@ const state = reactive<Partial<FormState>>({
 const ownerItems = ref<RadioGroupItem[]>([
     {
         label: "Ronny Koppitz",
-        description: "Generate a link for Ronny Koppitz.",
+        description: "Generiere einen Link für Ronny Koppitz.",
         value: "ronny"
     },
     {
         label: "Ingo Bollow",
-        description: "Generate a link for Ingo Bollow.",
+        description: "Generiere einen Link für Ingo Bollow.",
         value: "ingo"
     },
     {
         label: "Ronald Krahl",
-        description: "Generate a link for Ronald Krahl.",
+        description: "Generiere einen Link für Ronald Krahl.",
         value: "ronald"
     }
 ]);
@@ -91,8 +91,8 @@ async function onSubmit(event: FormSubmitEvent<FormState>) {
     generatedEmail.value = buildEmailTemplate(event.data, generatedUrl.value);
 
     toast.add({
-        title: "Content generated",
-        description: "The email template and personalized URL are ready to copy.",
+        title: "Inhalte generiert",
+        description: "Die E-Mail-Vorlage und die personalisierte URL sind zum Kopieren bereit.",
         color: "success"
     });
 }
@@ -114,16 +114,16 @@ async function copyToClipboard(value: string, title: string, description: string
 function copyGeneratedUrl() {
     return copyToClipboard(
         generatedUrl.value,
-        "Link copied",
-        "The URL has been copied to your clipboard."
+        "Link kopiert",
+        "Die URL wurde in deine Zwischenablage kopiert."
     );
 }
 
 function copyGeneratedEmail() {
     return copyToClipboard(
         generatedEmail.value,
-        "Email copied",
-        "The email template has been copied to your clipboard."
+        "E-Mail kopiert",
+        "Die E-Mail-Vorlage wurde in deine Zwischenablage kopiert."
     );
 }
 
@@ -143,10 +143,10 @@ function resetForm() {
         class="space-y-6"
         @submit="onSubmit">
         <UFormField
-            label="Owner"
+            label="Inhaber"
             name="owner"
             required
-            description="Choose which personalized Linkando base URL should be used.">
+            description="Wähle aus, welche personalisierte Linkando-Basis-URL verwendet werden soll.">
             <URadioGroup
                 v-model="state.owner"
                 :items="ownerItems"
@@ -159,7 +159,7 @@ function resetForm() {
 
         <div class="grid gap-4 sm:grid-cols-2">
             <UFormField
-                label="First Name"
+                label="Vorname"
                 name="firstName"
                 required>
                 <UInput
@@ -170,7 +170,7 @@ function resetForm() {
             </UFormField>
 
             <UFormField
-                label="Last Name"
+                label="Nachname"
                 name="lastName"
                 required>
                 <UInput
@@ -186,7 +186,7 @@ function resetForm() {
                 type="submit"
                 size="lg"
                 icon="i-lucide-link">
-                Generate Content
+                Inhalte generieren
             </UButton>
 
             <UButton
@@ -196,7 +196,7 @@ function resetForm() {
                 size="lg"
                 icon="i-lucide-refresh-cw"
                 @click="resetForm">
-                Reset Form
+                Formular zurücksetzen
             </UButton>
         </div>
 
